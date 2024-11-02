@@ -4,6 +4,11 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, Text, PerspectiveCamera } from '@react-three/drei'
 import { Sun, Moon, ChevronDown, Code, Briefcase, User, Mail, Github, Linkedin, FileText, Award, Book, Cpu, Menu, X } from 'lucide-react'
 
+
+// magic ui
+import SparklesText from "@/components/ui/sparkles-text";
+import { VelocityScroll } from "@/components/ui/scroll-based-velocity";
+
 // Utility function for class names
 const cn = (...classes: string[]) => classes.filter(Boolean).join(' ')
 
@@ -95,7 +100,7 @@ const awards = [
 const developerQuotes = [
   "I don't create a website, I create an experience for users.",
   "Good code is its own best documentation.",
-  "The web is a canvas, and code is my paint.",
+  "Fight For It,or Don't Cry For It .",
   "Every line of code should appear to be written by a single person.",
   "Simplicity is the soul of efficiency.",
 ]
@@ -368,35 +373,6 @@ const AnimatedText3D = ({ text }: { text: string }) => {
   )
 }
 
-// Gradient Text CSS (can be in App.css)
-const gradientTextStyle = {
-  background: "linear-gradient(90deg,#ff4c29,#22e299)",
-  WebkitBackgroundClip: "text",
-  WebkitTextFillColor: "transparent",
-  backgroundClip: "text",
-  color: "transparent",
-};
-
-// AnimatedText Component
-const AnimatedText = ({ text }: { text: string }) => {
-  const words = text.split(' ');
-  return (
-      <motion.div className="flex flex-wrap justify-center">
-          {words.map((word, index) => (
-              <motion.span
-                  key={index}
-                  className="mr-2"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: index * 0.2 }}
-                  style={gradientTextStyle} // Apply inline gradient style here
-              >
-                  {word}
-              </motion.span>
-          ))}
-      </motion.div>
-  );
-};
 
 // Main portfolio component
 const EnhancedAnimatedPortfolio = () => {
@@ -408,7 +384,6 @@ const EnhancedAnimatedPortfolio = () => {
     restDelta: 0.001
   })
 
-  const navbarOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1])
 
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark')
@@ -438,33 +413,24 @@ const EnhancedAnimatedPortfolio = () => {
             className="absolute inset-0 z-0"
           >
             <img
-              src="src/assets/panter psg2.png"
+              src="src/assets/panter psg bg.png"
               alt="SaiGanesh Ponnaganti"
               className="w-full h-full object-cover opacity-90"
             />
           </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="text-5xl md:text-7xl font-bold mb-4 text-center relative z-10 "
-          >
-            <AnimatedText text="SaiGanesh Ponnaganti" />
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="text-2xl md:text-3xl mb-8 text-center relative z-10"
-          >
-            <AnimatedText text="Full-Stack Web Developer" />
-          </motion.p>
+
+
+          <SparklesText text="SaiGanesh Ponnaganti" />
+          <SparklesText text="Full-Stack Web Developer" />
+
+
+          
           <motion.a
             href="#projects"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className={cn(
-              "px-8 py-3 rounded-full text-xl font-semibold transition-colors relative z-10",
+              "mt-10 px-8 py-3 rounded-full text-xl font-semibold transition-colors relative z-10",
               theme === 'dark' ? "bg-white text-black hover:bg-gray-200" : "bg-black text-white hover:bg-gray-800"
             )}
           >
@@ -493,6 +459,14 @@ const EnhancedAnimatedPortfolio = () => {
 
         <Marquee items={developerQuotes} theme={theme} />
 
+
+        <VelocityScroll 
+      text="I Don't Create a Website, I Create an Experience for Users. "
+      default_velocity={1} 
+      className="font-display text-center text-4xl font-bold tracking-[-0.02em] text-white drop-shadow-sm theme={theme} md:text-7xl md:leading-[5rem] drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] bg-clip-text bg-gradient-to-r from-violet-300 to-blue-400 text-transparent"
+       />
+
+
         <motion.section
           id="about"
           initial={{ opacity: 0, y: 50 }}
@@ -511,6 +485,8 @@ const EnhancedAnimatedPortfolio = () => {
           </div>
         </motion.section>
 
+
+        
         <Marquee items={skills.map(skill => skill.name)} theme={theme} />
 
         <motion.section
@@ -571,8 +547,12 @@ const EnhancedAnimatedPortfolio = () => {
           </div>
         </motion.section>
 
+        <VelocityScroll 
+      text="The Best Graduation Degree In Life is  B.Calm" default_velocity={3} 
+      className="font-display text-center text-xl font-bold tracking-[-0.02em] text-white drop-shadow-sm  md:text-xl md:leading-[5rem]"
+       />
         <Marquee items={experiences.map(exp => exp.company)} theme={theme} />
-
+        
         <motion.section
           id="experience"
           initial={{ opacity: 0, y: 50 }}
@@ -678,7 +658,7 @@ const EnhancedAnimatedPortfolio = () => {
         >
           <div className="max-w-3xl w-full">
             <h2 className="text-4xl font-bold mb-8 text-center font-geist">
-              <AnimatedText text="Get in Touch" />
+             
             </h2>
             <form className="space-y-6">
               <div>
@@ -727,6 +707,7 @@ const EnhancedAnimatedPortfolio = () => {
           <motion.a href="#" whileHover={{ scale: 1.1 }}><FileText className="w-6 h-6" /></motion.a>
         </div>
       </footer>
+       
     </div>
   )
 }
