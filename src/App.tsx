@@ -1,54 +1,15 @@
 import React, { useState, useEffect, useRef, Suspense } from 'react'
-import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValue, useInView, useAnimation } from 'framer-motion'
+import { motion, AnimatePresence, useScroll, useSpring, useInView } from 'framer-motion'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, Text, PerspectiveCamera } from '@react-three/drei'
-import { Sun, Moon, ChevronDown, Code, Briefcase, User, Mail, Github, Linkedin, FileText, Award, Book, Cpu, Menu, X } from 'lucide-react'
-
+import { Sun, Moon, ChevronDown, Mail, Github, Linkedin, FileText, Menu, X } from 'lucide-react'
 
 // magic ui
-import SparklesText from "@/components/ui/sparkles-text";
-import { VelocityScroll } from "@/components/ui/scroll-based-velocity";
+import SparklesText from "@/components/ui/sparkles-text"
+import { VelocityScroll } from "@/components/ui/scroll-based-velocity"
 
 // Utility function for class names
 const cn = (...classes: string[]) => classes.filter(Boolean).join(' ')
-
-// Custom font CSS
-const customFontCSS = `
-@font-face {
-  font-family: 'SpeedBeast';
-  src: url('/fonts/SpeedBeast.otf') format('opentype'),
-       url('/fonts/SpeedBeast.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Geist';
-  src: url('/fonts/Geist-Medium.otf') format('opentype'),
-       url('/fonts/Geist-Medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Geist';
-  src: url('/fonts/SpeedBeast FREE.otf') format('opentype'),
-       url('/fonts/SpeedBeast FREE.ttf') format('truetype');
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Geist';
-  src: url('/fonts/SpeedBeast FREE.otf') format('opentype'),
-       url('/fonts/SpeedBeast FREE.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Geist';
-  src: url('/fonts/SpeedBeast FREE.otf') format('opentype'),
-       url('/fonts/SpeedBeast FREE.ttf') format('truetype');
-  font-weight: 900;
-  font-style: normal;
-}
-`
 
 // Projects data
 const projects = [
@@ -327,7 +288,6 @@ const SkillBar = ({ skill, index, theme }: { skill: { name: string; level: numbe
 const Marquee = ({ items, theme }: { items: string[], theme: 'dark' | 'light' }) => {
   return (
     <div className="overflow-hidden py-4 bg-opacity-20 backdrop-blur-md">
-      
       <motion.div
         className="whitespace-nowrap"
         animate={{ x: [0, -2000] }}
@@ -373,7 +333,6 @@ const AnimatedText3D = ({ text }: { text: string }) => {
   )
 }
 
-
 // Main portfolio component
 const EnhancedAnimatedPortfolio = () => {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark')
@@ -384,7 +343,6 @@ const EnhancedAnimatedPortfolio = () => {
     restDelta: 0.001
   })
 
-
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark')
   }
@@ -393,6 +351,7 @@ const EnhancedAnimatedPortfolio = () => {
     <div className={cn(
       "min-h-screen font-sans transition-colors duration-300",
       theme === 'dark' ? "bg-black text-white" : "bg-white text-black"
+    
     )}>
       <SwirlCursor />
       <motion.div
@@ -419,11 +378,8 @@ const EnhancedAnimatedPortfolio = () => {
             />
           </motion.div>
 
-
           <SparklesText text="SaiGanesh Ponnaganti" />
           <SparklesText text="Full-Stack Web Developer" />
-
-
           
           <motion.a
             href="#projects"
@@ -459,13 +415,11 @@ const EnhancedAnimatedPortfolio = () => {
 
         <Marquee items={developerQuotes} theme={theme} />
 
-
         <VelocityScroll 
-      text="I Don't Create a Website, I Create an Experience for Users. "
-      default_velocity={1} 
-      className="font-display text-center text-4xl font-bold tracking-[-0.02em] text-white drop-shadow-sm theme={theme} md:text-7xl md:leading-[5rem] drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] bg-clip-text bg-gradient-to-r from-violet-300 to-blue-400 text-transparent"
-       />
-
+          text="I Don't Create a Website, I Create an Experience for Users. "
+          default_velocity={1} 
+          className="font-display text-center text-4xl font-bold tracking-[-0.02em] text-white drop-shadow-sm md:text-7xl md:leading-[5rem] drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] bg-clip-text bg-gradient-to-r from-violet-300 to-blue-400 text-transparent"
+        />
 
         <motion.section
           id="about"
@@ -484,8 +438,6 @@ const EnhancedAnimatedPortfolio = () => {
             </p>
           </div>
         </motion.section>
-
-
         
         <Marquee items={skills.map(skill => skill.name)} theme={theme} />
 
@@ -548,9 +500,11 @@ const EnhancedAnimatedPortfolio = () => {
         </motion.section>
 
         <VelocityScroll 
-      text="The Best Graduation Degree In Life is  B.Calm" default_velocity={3} 
-      className="font-display text-center text-xl font-bold tracking-[-0.02em] text-white drop-shadow-sm  md:text-xl md:leading-[5rem]"
-       />
+          text="The Best Graduation Degree In Life is  B.Calm" 
+          default_velocity={3} 
+          className="font-display text-center text-xl font-bold tracking-[-0.02em] text-white drop-shadow-sm md:text-xl md:leading-[5rem]"
+        />
+        
         <Marquee items={experiences.map(exp => exp.company)} theme={theme} />
         
         <motion.section
@@ -658,7 +612,7 @@ const EnhancedAnimatedPortfolio = () => {
         >
           <div className="max-w-3xl w-full">
             <h2 className="text-4xl font-bold mb-8 text-center font-geist">
-             
+              Contact Me
             </h2>
             <form className="space-y-6">
               <div>
@@ -707,7 +661,6 @@ const EnhancedAnimatedPortfolio = () => {
           <motion.a href="#" whileHover={{ scale: 1.1 }}><FileText className="w-6 h-6" /></motion.a>
         </div>
       </footer>
-       
     </div>
   )
 }
