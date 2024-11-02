@@ -13,10 +13,10 @@ const cn = (...classes: string[]) => classes.filter(Boolean).join(' ')
 
 // Projects data
 const projects = [
-  { id: 1, title: 'PBK ARTS', description: 'Responsive website for my incredibly talented brother', image: 'src/assets/car figma.png', category: 'Web Development', tech: 'Vite.js, React.js, Tailwind CSS' },
-  { id: 2, title: 'STAY GOLD REAL-ESTATE', description: 'Digital helper for renting rooms', image: 'src/assets/car figma.png', category: 'Full-Stack Development', tech: 'Angular, Oracle DB, Node.js, Express.js' },
-  { id: 3, title: 'PLUG AND POWER', description: 'Innovative plug-and-play power solutions for roads', image: 'src/assets/car figma.png', category: 'IoT & Web Development', tech: 'Python, Flask, IBM Db2, Docker' },
-  { id: 4, title: 'BLOOD BANK PROJECT', description: 'Platform connecting blood donors with those in need', image: 'src/assets/car figma.png', category: 'Web Development', tech: 'Python, HTML5, CSS, JavaScript, XAMPP' },
+  { id: 1, title: 'PBK ARTS', description: 'Responsive website for my incredibly talented brother', image: 'car figma.png', category: 'Web Development', tech: 'Vite.js, React.js, Tailwind CSS' },
+  { id: 2, title: 'STAY GOLD REAL-ESTATE', description: 'Digital helper for renting rooms', image: 'car figma.png', category: 'Full-Stack Development', tech: 'Angular, Oracle DB, Node.js, Express.js' },
+  { id: 3, title: 'PLUG AND POWER', description: 'Innovative plug-and-play power solutions for roads', image: 'car figma.png', category: 'IoT & Web Development', tech: 'Python, Flask, IBM Db2, Docker' },
+  { id: 4, title: 'BLOOD BANK PROJECT', description: 'Platform connecting blood donors with those in need', image: 'car figma.png', category: 'Web Development', tech: 'Python, HTML5, CSS, JavaScript, XAMPP' },
 ]
 
 // Skills data
@@ -372,7 +372,7 @@ const EnhancedAnimatedPortfolio = () => {
             className="absolute inset-0 z-0"
           >
             <img
-              src="src/assets/panter psg bg.png"
+              src="panter psg bg.png"
               alt="SaiGanesh Ponnaganti"
               className="w-full h-full object-cover opacity-90"
             />
