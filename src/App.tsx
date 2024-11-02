@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, Suspense } from 'react'
+import { useState, useEffect, useRef, Suspense } from 'react'
 import { motion, AnimatePresence, useScroll, useSpring, useInView } from 'framer-motion'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, Text, PerspectiveCamera } from '@react-three/drei'
