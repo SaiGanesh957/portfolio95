@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   motion,
   useAnimationFrame,
@@ -74,8 +74,18 @@ export function VelocityScroll({
 
     const x = useTransform(baseX, (v) => `${wrap(-100 / repetitions, 0, v)}%`);
 
-    const directionFactor = React.useRef<number>(1);
-    useAnimationFrame(( delta) => {
+    const directionFactor = useRef<number>(1);
+    const prevTimestamp = useRef<number | null>(null);
+
+    useAnimationFrame((timestamp) => {
+      if (prevTimestamp.current === null) {
+        prevTimestamp.current = timestamp;
+        return;
+      }
+
+      const delta = timestamp - prevTimestamp.current;
+      prevTimestamp.current = timestamp;
+
       let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
 
       if (velocityFactor.get() < 0) {
