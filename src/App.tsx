@@ -1,61 +1,148 @@
-import { useState, useEffect, useRef, Suspense } from 'react'
-import { motion, AnimatePresence, useScroll, useSpring, useInView } from 'framer-motion'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { OrbitControls, Text, PerspectiveCamera } from '@react-three/drei'
-import { Sun, Moon, ChevronDown, Mail, Github, Linkedin, FileText, Menu, X } from 'lucide-react'
+import { useState, useEffect, useRef, Suspense } from "react";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useSpring,
+  useInView,
+} from "framer-motion";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { OrbitControls, Text, PerspectiveCamera } from "@react-three/drei";
+import {
+  Sun,
+  Moon,
+  ChevronDown,
+  Mail,
+  Github,
+  Linkedin,
+  Instagram,
+  Menu,
+  X,
+} from "lucide-react";
 
 // magic ui
-import SparklesText from "@/components/ui/sparkles-text"
-import { VelocityScroll } from "@/components/ui/scroll-based-velocity"
+import SparklesText from "@/components/ui/sparkles-text";
+import { VelocityScroll } from "@/components/ui/scroll-based-velocity";
 
 // Utility function for class names
-const cn = (...classes: string[]) => classes.filter(Boolean).join(' ')
+const cn = (...classes: string[]) => classes.filter(Boolean).join(" ");
 
 // Projects data
 const projects = [
-  { id: 1, title: 'PBK ARTS', description: 'Responsive website for my incredibly talented brother', image: 'car figma.png', category: 'Web Development', tech: 'Vite.js, React.js, Tailwind CSS' },
-  { id: 2, title: 'STAY GOLD REAL-ESTATE', description: 'Digital helper for renting rooms', image: 'car figma.png', category: 'Full-Stack Development', tech: 'Angular, Oracle DB, Node.js, Express.js' },
-  { id: 3, title: 'PLUG AND POWER', description: 'Innovative plug-and-play power solutions for roads', image: 'car figma.png', category: 'IoT & Web Development', tech: 'Python, Flask, IBM Db2, Docker' },
-  { id: 4, title: 'BLOOD BANK PROJECT', description: 'Platform connecting blood donors with those in need', image: 'car figma.png', category: 'Web Development', tech: 'Python, HTML5, CSS, JavaScript, XAMPP' },
-]
+  {
+    id: 1,
+    title: "PBK ARTS",
+    description: "Responsive website for my incredibly talented brother",
+    image: "car figma.png",
+    category: "Web Development",
+    tech: "Vite.js, React.js, Tailwind CSS",
+  },
+  {
+    id: 2,
+    title: "STAY GOLD REAL-ESTATE",
+    description: "Digital helper for renting rooms",
+    image: "car figma.png",
+    category: "Full-Stack Development",
+    tech: "Angular, Oracle DB, Node.js, Express.js",
+  },
+  {
+    id: 3,
+    title: "PLUG AND POWER",
+    description: "Innovative plug-and-play power solutions for roads",
+    image: "car figma.png",
+    category: "IoT & Web Development",
+    tech: "Python, Flask, IBM Db2, Docker",
+  },
+  {
+    id: 4,
+    title: "BLOOD BANK PROJECT",
+    description: "Platform connecting blood donors with those in need",
+    image: "car figma.png",
+    category: "Web Development",
+    tech: "Python, HTML5, CSS, JavaScript, XAMPP",
+  },
+  {
+    id: 5,
+    title: "BLOOD BANK PROJECT",
+    description: "Platform connecting blood donors with those in need",
+    image: "car figma.png",
+    category: "Web Development",
+    tech: "Python, HTML5, CSS, JavaScript, XAMPP",
+  },
+  {
+    id: 6,
+    title: "BLOOD BANK PROJECT",
+    description: "Platform connecting blood donors with those in need",
+    image: "car figma.png",
+    category: "Web Development",
+    tech: "Python, HTML5, CSS, JavaScript, XAMPP",
+  },
+];
 
 // Skills data
 const skills = [
-  { name: 'Python', level: 90 },
-  { name: 'JavaScript', level: 85 },
-  { name: 'React', level: 80 },
-  { name: 'Angular', level: 75 },
-  { name: 'Node.js', level: 80 },
-  { name: 'MongoDB', level: 70 },
-]
+  { name: "Python", level: 90 },
+  { name: "JavaScript", level: 85 },
+  { name: "React", level: 80 },
+  { name: "Angular", level: 75 },
+  { name: "Node.js", level: 80 },
+  { name: "MongoDB", level: 70 },
+];
 
 // Experiences data
 const experiences = [
-  { role: 'Machine Learning Intern', company: 'SKILLDZIRE', period: 'May 2024 – July 2024' },
-  { role: 'Full-Stack Web Developer Intern', company: 'SLASHMARK', period: 'Nov 2023 – Feb 2024' },
-  { role: 'Cyber Security Intern', company: 'SUPRAJA TECHNOLOGIES', period: 'Jun 2023 – Jul 2023' },
-]
+  {
+    role: "Machine Learning Intern",
+    company: "SKILLDZIRE",
+    period: "May 2024 - July 2024",
+  },
+  {
+    role: "Full-Stack Web Developer Intern",
+    company: "SLASHMARK",
+    period: "Nov 2023 - Feb 2024",
+  },
+  {
+    role: "Cyber Security Intern",
+    company: "SUPRAJA TECHNOLOGIES",
+    period: "Jun 2023 - Jul 2023",
+  },
+];
 
 // Education data
 const education = [
-  { degree: 'B.Tech in Computer Science and Engineering', institution: 'Narasaraopet Engineering College', period: '2021 - 2025' },
-  { degree: 'Intermediate Education', institution: 'Sri Chaitanya Junior College', period: '2019 - 2021' },
-  { degree: 'Secondary School Education', institution: 'Bhashyam High School', period: '2018 - 2019' },
-]
+  {
+    degree: "B.Tech in Computer Science and Engineering",
+    institution: "Narasaraopet Engineering College",
+    period: "2021 - 2025",
+  },
+  {
+    degree: "Intermediate Education",
+    institution: "Bhavana Jr College",
+    period: "2019 - 2021",
+  },
+  {
+    degree: "Secondary School Education",
+    institution: "Z.P High School",
+    period: "2018 - 2019",
+  },
+];
 
 // Certifications data
 const certifications = [
-  'MongoDB Atlas Administrator Path - MongoDB',
-  'Machine Learning with Python: A Practical Introduction - edX',
-  'Enterprise Design Thinking Practitioner - IBM',
-]
+  "MongoDB Atlas Administrator Path - MongoDB",
+  "Enterprise Design Thinking Practitioner - IBM",
+  "Introduction to MongoDB for Students - MongoDB",
+  "Machine Learning with Python - edX",
+  "Digital Skills: User Experience - Accenture",
+  "Data Science and Machine Learning Capstone Project - edX",
+];
 
 // Awards data
 const awards = [
-  '1st Prize in Machine Learning Hackathon at Narasaraopet Engineering College',
-  '1st Prize in Web Development Contest',
-  '3rd Prize in Web Design competition at Jubilation 2K23',
-]
+  "1st Prize in Machine Learning Hackathon at Narasaraopet Engineering College",
+  "1st Prize in rigorous web development contest",
+  "3rd Prize in Web Design competition at Jubilation 2K23",
+];
 
 // Developer quotes for marquee
 const developerQuotes = [
@@ -64,29 +151,35 @@ const developerQuotes = [
   "Fight For It,or Don't Cry For It .",
   "Every line of code should appear to be written by a single person.",
   "Simplicity is the soul of efficiency.",
-]
+];
 
 // Navbar component
-const Navbar = ({ theme, toggleTheme }: { theme: 'dark' | 'light', toggleTheme: () => void }) => {
-  const [isOpen, setIsOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
+const Navbar = ({
+  theme,
+  toggleTheme,
+}: {
+  theme: "dark" | "light";
+  toggleTheme: () => void;
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
-    }
+      setScrolled(window.scrollY > 20);
+    };
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-  const toggleMenu = () => setIsOpen(!isOpen)
+  const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
     <motion.header
       className={cn(
         "fixed top-1 left-0 right-0 z-50 transition-all duration-300",
-        scrolled ? "bg-opacity-90 backdrop-blur-md shadow-md" : "bg-opacity-20",
+        scrolled ? "bg-opacity-90 backdrop-blur-md shadow-md" : "bg-opacity-20"
       )}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -100,13 +193,23 @@ const Navbar = ({ theme, toggleTheme }: { theme: 'dark' | 'light', toggleTheme: 
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <a href="#" className="text-xl sm:text-2xl font-bold font-speedbeast">
+            <a
+              href="#"
+              className="text-xl sm:text-2xl font-bold font-speedbeast"
+            >
               PSG
             </a>
           </motion.div>
           <div className="hidden md:block">
             <div className="ml-10 flex items-center space-x-4">
-              {['About', 'Skills', 'Projects', 'Experience', 'Education', 'Contact'].map((item) => (
+              {[
+                "About",
+                "Skills",
+                "Projects",
+                "Experience",
+                "Education",
+                "Contact",
+              ].map((item) => (
                 <motion.a
                   key={item}
                   href={`#${item.toLowerCase()}`}
@@ -124,12 +227,18 @@ const Navbar = ({ theme, toggleTheme }: { theme: 'dark' | 'light', toggleTheme: 
               onClick={toggleTheme}
               className={cn(
                 "p-2 rounded-full transition-colors duration-300 mr-2",
-                theme === 'dark' ? "bg-gray-800 text-white-400" : "bg-gray-200 text-gray-800"
+                theme === "dark"
+                  ? "bg-gray-800 text-white-400"
+                  : "bg-gray-200 text-gray-800"
               )}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
-              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              {theme === "dark" ? (
+                <Sun className="w-5 h-5" />
+              ) : (
+                <Moon className="w-5 h-5" />
+              )}
             </motion.button>
             <motion.button
               onClick={toggleMenu}
@@ -137,7 +246,11 @@ const Navbar = ({ theme, toggleTheme }: { theme: 'dark' | 'light', toggleTheme: 
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
             </motion.button>
           </div>
         </div>
@@ -147,15 +260,24 @@ const Navbar = ({ theme, toggleTheme }: { theme: 'dark' | 'light', toggleTheme: 
           <motion.div
             className="md:hidden"
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <div className={cn(
-              "px-2 pt-2 pb-3 space-y-1 sm:px-3",
-              theme === 'dark' ? "bg-black" : "bg-white"
-            )}>
-              {['About', 'Skills', 'Projects', 'Experience', 'Education', 'Contact'].map((item) => (
+            <div
+              className={cn(
+                "px-2 pt-2 pb-3 space-y-1 sm:px-3",
+                theme === "dark" ? "bg-black" : "bg-white"
+              )}
+            >
+              {[
+                "About",
+                "Skills",
+                "Projects",
+                "Experience",
+                "Education",
+                "Contact",
+              ].map((item) => (
                 <motion.a
                   key={item}
                   href={`#${item.toLowerCase()}`}
@@ -172,17 +294,19 @@ const Navbar = ({ theme, toggleTheme }: { theme: 'dark' | 'light', toggleTheme: 
         )}
       </AnimatePresence>
     </motion.header>
-  )
-}
+  );
+};
 
 // SwirlCursor component
 const SwirlCursor = () => {
-  const [cursorTrail, setCursorTrail] = useState<{ x: number; y: number; id: number; rotation: number }[]>([])
-  const [isClient, setIsClient] = useState(false)
+  const [cursorTrail, setCursorTrail] = useState<
+    { x: number; y: number; id: number; rotation: number }[]
+  >([]);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    setIsClient(true)
-  }, [])
+    setIsClient(true);
+  }, []);
 
   const handleMouseMove = (e: MouseEvent) => {
     setCursorTrail((prevTrail) => {
@@ -191,20 +315,20 @@ const SwirlCursor = () => {
         y: e.clientY,
         id: Date.now(),
         rotation: Math.random() * 360,
-      }
-      return [newPosition, ...prevTrail.slice(0, 19)] // Keep last 20 positions
-    })
-  }
+      };
+      return [newPosition, ...prevTrail.slice(0, 19)]; // Keep last 20 positions
+    });
+  };
 
   useEffect(() => {
-    window.addEventListener('mousemove', handleMouseMove)
+    window.addEventListener("mousemove", handleMouseMove);
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove)
-    }
-  }, [])
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
 
   if (!isClient) {
-    return null // Return null on server-side
+    return null; // Return null on server-side
   }
 
   return (
@@ -216,9 +340,9 @@ const SwirlCursor = () => {
             initial={{ opacity: 0.8, scale: 1 }}
             animate={{ opacity: 0, scale: 0.5, rotate: cursor.rotation }}
             exit={{ opacity: 0, scale: 0 }}
-            transition={{ duration: 1, ease: 'easeOut' }}
+            transition={{ duration: 1, ease: "easeOut" }}
             style={{
-              position: 'absolute',
+              position: "absolute",
               left: cursor.x,
               top: cursor.y,
               transform: `translate(-50%, -50%) rotate(${cursor.rotation}deg)`,
@@ -246,13 +370,21 @@ const SwirlCursor = () => {
         ))}
       </AnimatePresence>
     </div>
-  )
-}
+  );
+};
 
 // Skill bar component
-const SkillBar = ({ skill, index, theme }: { skill: { name: string; level: number }; index: number; theme: 'dark' | 'light' }) => {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
+const SkillBar = ({
+  skill,
+  index,
+  theme,
+}: {
+  skill: { name: string; level: number };
+  index: number;
+  theme: "dark" | "light";
+}) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
 
   return (
     <motion.div
@@ -266,26 +398,31 @@ const SkillBar = ({ skill, index, theme }: { skill: { name: string; level: numbe
         <span className="text-lg font-semibold">{skill.name}</span>
         <span className="text-lg font-bold">{skill.level}%</span>
       </div>
-      <div className={cn(
-        "h-3 rounded-full overflow-hidden",
-        theme === 'dark' ? "bg-gray-700" : "bg-gray-300"
-      )}>
+      <div
+        className={cn(
+          "h-3 rounded-full overflow-hidden",
+          theme === "dark" ? "bg-gray-700" : "bg-gray-300"
+        )}
+      >
         <motion.div
-          className={cn(
-            "h-full",
-            theme === 'dark' ? "bg-white" : "bg-black"
-          )}
+          className={cn("h-full", theme === "dark" ? "bg-white" : "bg-black")}
           initial={{ width: 0 }}
           animate={isInView ? { width: `${skill.level}%` } : {}}
           transition={{ duration: 0.8, delay: index * 0.1 }}
         />
       </div>
     </motion.div>
-  )
-}
+  );
+};
 
 // Marquee component
-const Marquee = ({ items, theme }: { items: string[], theme: 'dark' | 'light' }) => {
+const Marquee = ({
+  items,
+  theme,
+}: {
+  items: string[];
+  theme: "dark" | "light";
+}) => {
   return (
     <div className="overflow-hidden py-4 bg-opacity-20 backdrop-blur-md">
       <motion.div
@@ -294,27 +431,30 @@ const Marquee = ({ items, theme }: { items: string[], theme: 'dark' | 'light' })
         transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
       >
         {items.map((item, index) => (
-          <span key={index} className={cn(
-            "text-xl font-semibold mx-8",
-            theme === 'dark' ? "text-white" : "text-black"
-          )}>
+          <span
+            key={index}
+            className={cn(
+              "text-xl font-semibold mx-8",
+              theme === "dark" ? "text-white" : "text-black"
+            )}
+          >
             {item}
           </span>
         ))}
       </motion.div>
     </div>
-  )
-}
+  );
+};
 
 // 3D Text component
 const AnimatedText3D = ({ text }: { text: string }) => {
-  const textRef = useRef<any>()
+  const textRef = useRef<any>();
   useFrame(({ clock }) => {
     if (textRef.current) {
-      textRef.current.rotation.x = Math.sin(clock.elapsedTime) * 0.2
-      textRef.current.rotation.y = Math.sin(clock.elapsedTime) * 0.2
+      textRef.current.rotation.x = Math.sin(clock.elapsedTime) * 0.2;
+      textRef.current.rotation.y = Math.sin(clock.elapsedTime) * 0.2;
     }
-  })
+  });
 
   return (
     <Text
@@ -330,34 +470,35 @@ const AnimatedText3D = ({ text }: { text: string }) => {
     >
       {text}
     </Text>
-  )
-}
+  );
+};
 
 // Main portfolio component
 const EnhancedAnimatedPortfolio = () => {
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark')
-  const { scrollYProgress } = useScroll()
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
-    restDelta: 0.001
-  })
+    restDelta: 0.001,
+  });
 
   const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark')
-  }
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
 
   return (
-    <div className={cn(
-      "min-h-screen font-sans transition-colors duration-300",
-      theme === 'dark' ? "bg-black text-white" : "bg-white text-black"
-    
-    )}>
+    <div
+      className={cn(
+        "min-h-screen font-sans transition-colors duration-300",
+        theme === "dark" ? "bg-black text-white" : "bg-white text-black"
+      )}
+    >
       <SwirlCursor />
       <motion.div
         className={cn(
           "fixed top-0 left-0 right-0 h-1 origin-left z-50",
-          theme === 'dark' ? "bg-white" : "bg-black"
+          theme === "dark" ? "bg-white" : "bg-black"
         )}
         style={{ scaleX }}
       />
@@ -380,14 +521,16 @@ const EnhancedAnimatedPortfolio = () => {
 
           <SparklesText text="SaiGanesh Ponnaganti" />
           <SparklesText text="Full-Stack Web Developer" />
-          
+
           <motion.a
             href="#projects"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className={cn(
               "mt-10 px-8 py-3 rounded-full text-xl font-semibold transition-colors relative z-10",
-              theme === 'dark' ? "bg-white text-black hover:bg-gray-200" : "bg-black text-white hover:bg-gray-800"
+              theme === "dark"
+                ? "bg-white text-black hover:bg-gray-200"
+                : "bg-black text-white hover:bg-gray-800"
             )}
           >
             Explore My Work
@@ -395,7 +538,12 @@ const EnhancedAnimatedPortfolio = () => {
           <motion.div
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 2, duration: 1, repeat: Infinity, repeatType: 'reverse' }}
+            transition={{
+              delay: 2,
+              duration: 1,
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
             className="absolute bottom-8 z-10"
           >
             <ChevronDown className="w-10 h-10" />
@@ -415,9 +563,9 @@ const EnhancedAnimatedPortfolio = () => {
 
         <Marquee items={developerQuotes} theme={theme} />
 
-        <VelocityScroll 
+        <VelocityScroll
           text="I Don't Create a Website, I Create an Experience for Users. "
-          default_velocity={1} 
+          default_velocity={1}
           className="font-display text-center text-4xl font-bold tracking-[-0.02em] text-white drop-shadow-sm md:text-7xl md:leading-[5rem] drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] bg-clip-text bg-gradient-to-r from-violet-300 to-blue-400 text-transparent"
         />
 
@@ -431,15 +579,23 @@ const EnhancedAnimatedPortfolio = () => {
           <div className="max-w-4xl text-center">
             <h2 className="text-4xl font-bold mb-8">About Me</h2>
             <p className="text-xl leading-relaxed mb-6">
-              I'm a passionate Full-Stack Web Developer with a keen interest in creating innovative solutions. Currently pursuing my B.Tech in Computer Science and Engineering at Narasaraopet Engineering College, I bring a blend of theoretical knowledge and practical skills to every project.
+              I'm a passionate Full-Stack Web Developer with a keen interest in
+              creating innovative solutions. Currently pursuing my B.Tech in
+              Computer Science and Engineering at Narasaraopet Engineering
+              College, I bring a blend of theoretical knowledge and practical
+              skills to every project.
             </p>
             <p className="text-xl leading-relaxed">
-              My expertise spans across various technologies, and I'm always eager to learn and adapt to new challenges. With a strong foundation in both front-end and back-end development, I strive to create seamless, user-friendly applications that solve real-world problems.
+              My expertise spans across various technologies, and I'm always
+              eager to learn and adapt to new challenges. With a strong
+              foundation in both front-end and back-end development, I strive to
+              create seamless, user-friendly applications that solve real-world
+              problems.
             </p>
           </div>
         </motion.section>
-        
-        <Marquee items={skills.map(skill => skill.name)} theme={theme} />
+
+        <Marquee items={skills.map((skill) => skill.name)} theme={theme} />
 
         <motion.section
           id="skills"
@@ -449,10 +605,17 @@ const EnhancedAnimatedPortfolio = () => {
           className="min-h-screen flex items-center justify-center p-8"
         >
           <div className="max-w-4xl w-full">
-            <h2 className="text-4xl font-bold mb-12 text-center">Skills & Expertise</h2>
+            <h2 className="text-4xl font-bold mb-12 text-center">
+              Skills & Expertise
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {skills.map((skill, index) => (
-                <SkillBar key={skill.name} skill={skill} index={index} theme={theme} />
+                <SkillBar
+                  key={skill.name}
+                  skill={skill}
+                  index={index}
+                  theme={theme}
+                />
               ))}
             </div>
           </div>
@@ -465,7 +628,9 @@ const EnhancedAnimatedPortfolio = () => {
           transition={{ duration: 0.8 }}
           className="min-h-screen p-8"
         >
-          <h2 className="text-4xl font-bold mb-16 text-center">Featured Projects</h2>
+          <h2 className="text-4xl font-bold mb-16 text-center">
+            Featured Projects
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {projects.map((project, index) => (
               <motion.div
@@ -476,11 +641,17 @@ const EnhancedAnimatedPortfolio = () => {
                 className="relative overflow-hidden rounded-lg shadow-lg project-image"
                 whileHover={{ scale: 1.05 }}
               >
-                <img src={project.image} alt={project.title} className="w-full h-64 object-cover" />
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-64 object-cover"
+                />
                 <motion.div
                   className={cn(
                     "absolute inset-0 flex flex-col justify-center items-center p-6 text-white",
-                    theme === 'dark' ? "bg-black bg-opacity-70" : "bg-white bg-opacity-70"
+                    theme === "dark"
+                      ? "bg-black bg-opacity-70"
+                      : "bg-white bg-opacity-70"
                   )}
                   initial={{ opacity: 0 }}
                   whileHover={{ opacity: 1 }}
@@ -489,24 +660,30 @@ const EnhancedAnimatedPortfolio = () => {
                   <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
                   <p className="text-center mb-4">{project.description}</p>
                   <p className="text-sm mb-4">{project.tech}</p>
-                  <span className={cn(
-                    "px-4 py-2 rounded-full text-sm font-semibold",
-                    theme === 'dark' ? "bg-white text-black" : "bg-black text-white"
-                  )}>{project.category}</span>
+                  <span
+                    className={cn(
+                      "px-4 py-2 rounded-full text-sm font-semibold",
+                      theme === "dark"
+                        ? "bg-white text-black"
+                        : "bg-black text-white"
+                    )}
+                  >
+                    {project.category}
+                  </span>
                 </motion.div>
               </motion.div>
             ))}
           </div>
         </motion.section>
 
-        <VelocityScroll 
-          text="The Best Graduation Degree In Life is  B.Calm" 
-          default_velocity={3} 
-          className="font-display text-center text-xl font-bold tracking-[-0.02em] text-white drop-shadow-sm md:text-xl md:leading-[5rem]"
+        <VelocityScroll
+          text="      || The Best Graduation Degree In Life is  B.Calm     ||       Everybody Loves You Until You Became Competition"
+          default_velocity={3}
+          className="font-display text-center text-xl  font-bold tracking-[-0.02em]  drop-shadow-sm  md:text-xl md:leading-[5rem]"
         />
-        
-        <Marquee items={experiences.map(exp => exp.company)} theme={theme} />
-        
+
+        <Marquee items={experiences.map((exp) => exp.company)} theme={theme} />
+
         <motion.section
           id="experience"
           initial={{ opacity: 0, y: 50 }}
@@ -567,7 +744,9 @@ const EnhancedAnimatedPortfolio = () => {
           className="min-h-screen flex items-center justify-center p-8"
         >
           <div className="max-w-4xl w-full">
-            <h2 className="text-4xl font-bold mb-12 text-center">Certifications & Awards</h2>
+            <h2 className="text-4xl font-bold mb-12 text-center">
+              Certifications & Awards
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
                 <h3 className="text-2xl font-bold mb-4">Certifications</h3>
@@ -616,25 +795,52 @@ const EnhancedAnimatedPortfolio = () => {
             </h2>
             <form className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-xl mb-2">Name</label>
-                <input type="text" id="name" name="name" className={cn(
-                  "w-full p-3 rounded-lg focus:outline-none transition-colors",
-                  theme === 'dark' ? "bg-gray-800 border-2 border-gray-700 focus:border-white" : "bg-gray-200 border-2 border-gray-300 focus:border-black"
-                )} />
+                <label htmlFor="name" className="block text-xl mb-2">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  className={cn(
+                    "w-full p-3 rounded-lg focus:outline-none transition-colors",
+                    theme === "dark"
+                      ? "bg-gray-800 border-2 border-gray-700 focus:border-white"
+                      : "bg-gray-200 border-2 border-gray-300 focus:border-black"
+                  )}
+                />
               </div>
               <div>
-                <label htmlFor="email" className="block text-xl mb-2">Email</label>
-                <input type="email" id="email" name="email" className={cn(
-                  "w-full p-3 rounded-lg focus:outline-none transition-colors",
-                  theme === 'dark' ? "bg-gray-800 border-2 border-gray-700 focus:border-white" : "bg-gray-200 border-2 border-gray-300 focus:border-black"
-                )} />
+                <label htmlFor="email" className="block text-xl mb-2">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  className={cn(
+                    "w-full p-3 rounded-lg focus:outline-none transition-colors",
+                    theme === "dark"
+                      ? "bg-gray-800 border-2 border-gray-700 focus:border-white"
+                      : "bg-gray-200 border-2 border-gray-300 focus:border-black"
+                  )}
+                />
               </div>
               <div>
-                <label htmlFor="message" className="block text-xl mb-2">Message</label>
-                <textarea id="message" name="message" rows={4} className={cn(
-                  "w-full p-3 rounded-lg focus:outline-none transition-colors",
-                  theme === 'dark' ? "bg-gray-800 border-2 border-gray-700 focus:border-white" : "bg-gray-200 border-2 border-gray-300 focus:border-black"
-                )}></textarea>
+                <label htmlFor="message" className="block text-xl mb-2">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={4}
+                  className={cn(
+                    "w-full p-3 rounded-lg focus:outline-none transition-colors",
+                    theme === "dark"
+                      ? "bg-gray-800 border-2 border-gray-700 focus:border-white"
+                      : "bg-gray-200 border-2 border-gray-300 focus:border-black"
+                  )}
+                ></textarea>
               </div>
               <motion.button
                 type="submit"
@@ -642,7 +848,9 @@ const EnhancedAnimatedPortfolio = () => {
                 whileTap={{ scale: 0.95 }}
                 className={cn(
                   "w-full p-4 text-xl font-bold rounded-lg transition-colors",
-                  theme === 'dark' ? "bg-white text-black hover:bg-gray-200" : "bg-black text-white hover:bg-gray-800"
+                  theme === "dark"
+                    ? "bg-white text-black hover:bg-gray-200"
+                    : "bg-black text-white hover:bg-gray-800"
                 )}
               >
                 Send Message
@@ -653,16 +861,30 @@ const EnhancedAnimatedPortfolio = () => {
       </main>
 
       <footer className="py-8 text-center font-geist">
-        <p>&copy; 2023 SaiGanesh Ponnaganti. Crafting innovative web solutions.</p>
+        <p>
+          &copy; 2023 SaiGanesh Ponnaganti. Crafting innovative web solutions.
+        </p>
         <div className="flex justify-center space-x-6 mt-4">
-          <motion.a href="#" whileHover={{ scale: 1.1 }}><Github className="w-6 h-6" /></motion.a>
-          <motion.a href="#" whileHover={{ scale: 1.1 }}><Linkedin className="w-6 h-6" /></motion.a>
-          <motion.a href="#" whileHover={{ scale: 1.1 }}><Mail className="w-6 h-6" /></motion.a>
-          <motion.a href="#" whileHover={{ scale: 1.1 }}><FileText className="w-6 h-6" /></motion.a>
+          <motion.a
+            href="https://www.instagram.com/saiganesh_957/"
+            whileHover={{ scale: 1.1 }}
+          ></motion.a>
+          <Instagram className="w-6 h-6" />
+          <motion.a
+            href="www.linkedin.com/in/saiganesh-ponnaganti-108b36283"
+            whileHover={{ scale: 1.1 }}
+          >
+            <Linkedin className="w-6 h-6" />
+          </motion.a>
+          <motion.a href="https://github.com/" whileHover={{ scale: 1.1 }}>
+            <Github className="w-6 h-6" />
+          </motion.a>
+          <motion.a href="psg779955@gmail.com" whileHover={{ scale: 1.1 }}>
+            <Mail className="w-6 h-6" />
+          </motion.a>
         </div>
       </footer>
     </div>
-  )
-}
-
-export default EnhancedAnimatedPortfolio
+  );
+};
+export default EnhancedAnimatedPortfolio;
