@@ -514,7 +514,7 @@ const EnhancedAnimatedPortfolio = () => {
             className="absolute inset-0 z-0"
           >
             <img
-              src="panter psg bg.png"
+              src="panter psg2.png"
               alt="SaiGanesh Ponnaganti"
               className="w-full h-full object-cover opacity-90"
             />
