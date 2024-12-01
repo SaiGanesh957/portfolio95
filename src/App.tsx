@@ -18,6 +18,7 @@ import {
   Instagram,
   Menu,
   X,
+  FileX,
 } from "lucide-react";
 
 // magic ui
@@ -861,21 +862,42 @@ const EnhancedAnimatedPortfolio = () => {
       </main>
 
       <footer className="py-8 text-center font-geist">
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <iframe
+            style={{ borderRadius: "12px" }}
+            src="https://open.spotify.com/embed/playlist/6oXhJUD61j90ef9KFaFhQD?utm_source=generator&theme=0"
+            width="50%"
+            height="250"
+            frameBorder="0"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+          ></iframe>
+        </div>
+
         <p>
           &copy; 2023 SaiGanesh Ponnaganti. Crafting innovative web solutions.
         </p>
+
         <div className="flex justify-center space-x-6 mt-4">
           <motion.a
             href="https://www.instagram.com/saiganesh_957/"
             whileHover={{ scale: 1.1 }}
-          ></motion.a>
-          <Instagram className="w-6 h-6" />
+          >
+            <Instagram className="w-6 h-6" />
+          </motion.a>
           <motion.a
             href="www.linkedin.com/in/saiganesh-ponnaganti-108b36283"
             whileHover={{ scale: 1.1 }}
           >
             <Linkedin className="w-6 h-6" />
           </motion.a>
+
           <motion.a href="https://github.com/" whileHover={{ scale: 1.1 }}>
             <Github className="w-6 h-6" />
           </motion.a>
