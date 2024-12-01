@@ -18,7 +18,6 @@ import {
   Instagram,
   Menu,
   X,
-  FileX,
 } from "lucide-react";
 
 // magic ui
