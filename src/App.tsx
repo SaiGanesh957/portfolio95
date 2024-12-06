@@ -566,175 +566,201 @@ const EnhancedAnimatedPortfolio = () => {
         <VelocityScroll
           text="I Don't Create a Website, I Create an Experience for Users. "
           default_velocity={1}
-          className="font-display text-center text-4xl font-bold tracking-[-0.02em] text-white drop-shadow-sm md:text-7xl md:leading-[5rem] drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] bg-clip-text bg-gradient-to-r from-violet-300 to-blue-400 text-transparent"
+          className="font-display text-center text-4xl font-bold tracking-[-0.02em] bg-gradient-to-r from-purple-400 to-yellow-400"
         />
 
-        <motion.section
-          id="about"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="min-h-screen flex items-center justify-center p-8"
-        >
-          <div className="max-w-4xl text-center">
-            <h2 className="text-4xl font-bold mb-8">About Me</h2>
-            <p className="text-xl leading-relaxed mb-6">
-              I'm a passionate Full-Stack Web Developer with a keen interest in
-              creating innovative solutions. Currently pursuing my B.Tech in
-              Computer Science and Engineering at Narasaraopet Engineering
-              College, I bring a blend of theoretical knowledge and practical
-              skills to every project.
-            </p>
-            <p className="text-xl leading-relaxed">
-              My expertise spans across various technologies, and I'm always
-              eager to learn and adapt to new challenges. With a strong
-              foundation in both front-end and back-end development, I strive to
-              create seamless, user-friendly applications that solve real-world
-              problems.
-            </p>
-          </div>
-        </motion.section>
+<motion.section
+  id="about"
+  initial={{ opacity: 0, y: 50 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }}
+  className="min-h-screen flex items-center justify-center p-8 relative"
+>
+  <div className="max-w-4xl text-center relative">
+   
+    <img
+      src="Robot3DAnimatedIcon.gif"
+      alt="3D Robot Icon"
+      width={150}
+      className="absolute top-0 left-1/3 transform -translate-x-1/2 -translate-y-1/2"
+    />
+    <h2 className="text-4xl font-bold mb-8 relative">About Me</h2>
+    <p className="text-xl leading-relaxed mb-6">
+      I'm a passionate Full-Stack Web Developer with a keen interest in creating innovative solutions. 
+      Currently pursuing my B.Tech in Computer Science and Engineering at Narasaraopet Engineering College, 
+      I bring a blend of theoretical knowledge and practical skills to every project.
+    </p>
+    <p className="text-xl leading-relaxed">
+      My expertise spans across various technologies, and I'm always eager to learn and adapt to new challenges. 
+      With a strong foundation in both front-end and back-end development, I strive to create seamless, 
+      user-friendly applications that solve real-world problems.
+    </p>
+  </div>
+</motion.section>
 
-        <Marquee items={skills.map((skill) => skill.name)} theme={theme} />
-
-        <motion.section
-          id="skills"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="min-h-screen flex items-center justify-center p-8"
-        >
-          <div className="max-w-4xl w-full">
-            <h2 className="text-4xl font-bold mb-12 text-center">
-              Skills & Expertise
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {skills.map((skill, index) => (
-                <SkillBar
-                  key={skill.name}
-                  skill={skill}
-                  index={index}
-                  theme={theme}
-                />
-              ))}
-            </div>
-          </div>
-        </motion.section>
-
-        <motion.section
-          id="projects"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="min-h-screen p-8"
-        >
-          <h2 className="text-4xl font-bold mb-16 text-center">
-            Featured Projects
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {projects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
-                className="relative overflow-hidden rounded-lg shadow-lg project-image"
-                whileHover={{ scale: 1.05 }}
-              >
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-64 object-cover"
-                />
-                <motion.div
-                  className={cn(
-                    "absolute inset-0 flex flex-col justify-center items-center p-6 text-white",
-                    theme === "dark"
-                      ? "bg-black bg-opacity-70"
-                      : "bg-white bg-opacity-70"
-                  )}
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
-                  <p className="text-center mb-4">{project.description}</p>
-                  <p className="text-sm mb-4">{project.tech}</p>
-                  <span
-                    className={cn(
-                      "px-4 py-2 rounded-full text-sm font-semibold",
-                      theme === "dark"
-                        ? "bg-white text-black"
-                        : "bg-black text-white"
-                    )}
-                  >
-                    {project.category}
-                  </span>
-                </motion.div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
-
-        <VelocityScroll
-          text="      || The Best Graduation Degree In Life is  B.Calm     ||       Everybody Loves You Until You Became Competition"
-          default_velocity={3}
-          className="font-display text-center text-xl  font-bold tracking-[-0.02em]  drop-shadow-sm  md:text-xl md:leading-[5rem]"
+<motion.section
+  id="skills"
+  initial={{ opacity: 0, y: 50 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }}
+  className="min-h-screen flex items-center justify-center p-8 relative "
+>
+  <div className="max-w-4xl w-full relative">
+    <img
+      src="Jumping3DIcon.gif"
+      alt="Jumping Icon"
+      width={100}
+      className="absolute top-0 left-1 transform -translate-x-1/2 -translate-y-1/2"
+    />
+    <h2 className="text-4xl font-bold mb-12 text-center relative">
+      Skills & Expertise
+    </h2>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {skills.map((skill, index) => (
+        <SkillBar
+          key={skill.name}
+          skill={skill}
+          index={index}
+          theme={theme}
         />
+      ))}
+    </div>
+  </div>
+</motion.section>
 
-        <Marquee items={experiences.map((exp) => exp.company)} theme={theme} />
 
-        <motion.section
-          id="experience"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="min-h-screen flex items-center justify-center p-8"
+<motion.section 
+  id="projects"
+  initial={{ opacity: 0, y: 50 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }}
+  className="min-h-screen p-8 relative"
+>
+  <img 
+    src="RotatingLoading3DIcon.gif" 
+    alt="Rotating Icon"
+    width={100} 
+    className="absolute left-1/3 z-0 top-0" 
+  />
+  
+  <h2 className="text-4xl font-bold mb-16 text-center z-10 relative">
+    Featured Projects
+  </h2>
+
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto z-10 relative">
+    {projects.map((project, index) => (
+      <motion.div
+        key={project.id}
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: index * 0.2 }}
+        className="relative overflow-hidden rounded-lg shadow-lg project-image"
+        whileHover={{ scale: 1.05 }}
+      >
+        <img
+          src={project.image}
+          alt={project.title}
+          className="w-full h-64 object-cover"
+        />
+        <motion.div
+          className={cn(
+            "absolute inset-0 flex flex-col justify-center items-center p-6 text-white",
+            theme === "dark"
+              ? "bg-black bg-opacity-70"
+              : "bg-white bg-opacity-70"
+          )}
+          initial={{ opacity: 0 }}
+          whileHover={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
         >
-          <div className="max-w-4xl w-full">
-            <h2 className="text-4xl font-bold mb-12 text-center">Experience</h2>
-            {experiences.map((exp, index) => (
-              <motion.div
-                key={exp.company}
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="mb-8"
-              >
-                <h3 className="text-2xl font-bold">{exp.role}</h3>
-                <p className="text-xl">{exp.company}</p>
-                <p className="text-lg text-gray-400">{exp.period}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
+          <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
+          <p className="text-center mb-4">{project.description}</p>
+          <p className="text-sm mb-4">{project.tech}</p>
+          <span
+            className={cn(
+              "px-4 py-2 rounded-full text-sm font-semibold",
+              theme === "dark"
+                ? "bg-white text-black"
+                : "bg-black text-white"
+            )}
+          >
+            {project.category}
+          </span>
+        </motion.div>
+      </motion.div>
+    ))}
+  </div>
+</motion.section>
 
-        <motion.section
-          id="education"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="min-h-screen flex items-center justify-center p-8"
-        >
-          <div className="max-w-4xl w-full">
-            <h2 className="text-4xl font-bold mb-12 text-center">Education</h2>
-            {education.map((edu, index) => (
-              <motion.div
-                key={edu.institution}
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="mb-8"
-              >
-                <h3 className="text-2xl font-bold">{edu.degree}</h3>
-                <p className="text-xl">{edu.institution}</p>
-                <p className="text-lg text-gray-400">{edu.period}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
+<motion.section
+  id="experience"
+  initial={{ opacity: 0, y: 50 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }}
+  className="min-h-screen flex items-center justify-center p-8 relative"
+>
+  {/* Background Image */}
+  <img 
+    src="Abstract3DIcon.gif" 
+    alt="3D Abstract Icon" 
+    width={450} 
+    className="z-0 absolute top-50 left-2/3 transform -translate-x-1/2"
+  />
+  
+  {/* Content Section */}
+  <div className="max-w-4xl w-full relative z-10">
+    <h2 className="text-4xl font-bold mb-12 text-center">Experience</h2>
+    
+    {experiences.map((exp, index) => (
+      <motion.div
+        key={exp.company}
+        initial={{ opacity: 0, x: -50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5, delay: index * 0.1 }}
+        className="mb-8"
+      >
+        <h3 className="text-2xl font-bold">{exp.role}</h3>
+        <p className="text-xl">{exp.company}</p>
+        <p className="text-lg text-gray-400">{exp.period}</p>
+      </motion.div>
+    ))}
+  </div>
+</motion.section>
 
-        <Marquee items={certifications} theme={theme} />
+<motion.section
+  id="education"
+  initial={{ opacity: 0, y: 50 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }}
+  className="min-h-screen flex items-center justify-center p-8 relative"
+>
+  {/* Background Image */}
+  <img 
+    src="3dman.png" 
+    alt="3D Man" 
+    width={500} 
+    className="absolute right-40 z-0 top-1/2 transform -translate-y-1/2" 
+  />
+  
+  {/* Content */}
+  <div className="max-w-4xl w-full relative z-10">
+    <h2 className="text-4xl font-bold mb-12 text-center">Education</h2>
+    {education.map((edu, index) => (
+      <motion.div
+        key={edu.institution}
+        initial={{ opacity: 0, x: -50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5, delay: index * 0.1 }}
+        className="mb-8"
+      >
+        <h3 className="text-2xl font-bold">{edu.degree}</h3>
+        <p className="text-xl">{edu.institution}</p>
+        <p className="text-lg text-gray-400">{edu.period}</p>
+      </motion.div>
+    ))}
+  </div>
+</motion.section>
+
 
         <motion.section
           id="certifications"
