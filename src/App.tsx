@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 
 // magic ui
+import { RainbowButton } from "@/components/ui/rainbow-button";
 import SparklesText from "@/components/ui/sparkles-text";
 import { VelocityScroll } from "@/components/ui/scroll-based-velocity";
 
@@ -504,37 +505,34 @@ const EnhancedAnimatedPortfolio = () => {
       />
       <Navbar theme={theme} toggleTheme={toggleTheme} />
 
-      <main className="font-geist pt-16 sm:pt-20">
+      <main className="pt-16 sm:pt-20">
         <section className="h-screen flex flex-col items-center justify-center relative overflow-hidden">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1 }}
+            transition={{ duration:1 }}
             className="absolute inset-0 z-0"
           >
             <img
-              src="panter psg2.png"
+              src="psg products.jpeg"
               alt="SaiGanesh Ponnaganti"
-              className="w-full h-full object-cover opacity-90"
+              className="w-full h-full object-cover opacity-50"
             />
           </motion.div>
 
-          <SparklesText text="SaiGanesh Ponnaganti" />
-          <SparklesText text="Full-Stack Web Developer" />
+          <SparklesText text="Ponnaganti SaiGanesh" />
+          <SparklesText text="Full-Stack Web Developer & UI/UX Designer" />
+
 
           <motion.a
             href="#projects"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className={cn(
-              "mt-10 px-8 py-3 rounded-full text-xl font-semibold transition-colors relative z-10",
-              theme === "dark"
-                ? "bg-white text-black hover:bg-gray-200"
-                : "bg-black text-white hover:bg-gray-800"
-            )}
           >
-            Explore My Work
+          <RainbowButton className="mt-10">Explore My Work</RainbowButton>
+           
           </motion.a>
+
           <motion.div
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
