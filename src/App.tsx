@@ -8,26 +8,14 @@ import {
 } from "framer-motion";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Text, PerspectiveCamera } from "@react-three/drei";
-import {
-  Sun,
-  Moon,
-  ChevronDown,
-  Mail,
-  Github,
-  Linkedin,
-  Instagram,
-  Menu,
-  X,
-} from "lucide-react";
+import { Sun, Moon, ChevronDown, Mail, Github, Linkedin, Instagram, Menu, X } from 'lucide-react';
 
-// magic ui
+import { RainbowButton } from "@/components/ui/rainbow-button";
 import SparklesText from "@/components/ui/sparkles-text";
 import { VelocityScroll } from "@/components/ui/scroll-based-velocity";
 
-// Utility function for class names
 const cn = (...classes: string[]) => classes.filter(Boolean).join(" ");
 
-// Projects data
 const projects = [
   {
     id: 1,
@@ -79,7 +67,6 @@ const projects = [
   },
 ];
 
-// Skills data
 const skills = [
   { name: "Python", level: 90 },
   { name: "JavaScript", level: 85 },
@@ -89,7 +76,6 @@ const skills = [
   { name: "MongoDB", level: 70 },
 ];
 
-// Experiences data
 const experiences = [
   {
     role: "Machine Learning Intern",
@@ -108,7 +94,6 @@ const experiences = [
   },
 ];
 
-// Education data
 const education = [
   {
     degree: "B.Tech in Computer Science and Engineering",
@@ -127,7 +112,6 @@ const education = [
   },
 ];
 
-// Certifications data
 const certifications = [
   "MongoDB Atlas Administrator Path - MongoDB",
   "Enterprise Design Thinking Practitioner - IBM",
@@ -137,14 +121,12 @@ const certifications = [
   "Data Science and Machine Learning Capstone Project - edX",
 ];
 
-// Awards data
 const awards = [
   "1st Prize in Machine Learning Hackathon at Narasaraopet Engineering College",
   "1st Prize in rigorous web development contest",
   "3rd Prize in Web Design competition at Jubilation 2K23",
 ];
 
-// Developer quotes for marquee
 const developerQuotes = [
   "I don't create a website, I create an experience for users.",
   "Good code is its own best documentation.",
@@ -153,7 +135,6 @@ const developerQuotes = [
   "Simplicity is the soul of efficiency.",
 ];
 
-// Navbar component
 const Navbar = ({
   theme,
   toggleTheme,
@@ -297,7 +278,6 @@ const Navbar = ({
   );
 };
 
-// SwirlCursor component
 const SwirlCursor = () => {
   const [cursorTrail, setCursorTrail] = useState<
     { x: number; y: number; id: number; rotation: number }[]
@@ -316,7 +296,7 @@ const SwirlCursor = () => {
         id: Date.now(),
         rotation: Math.random() * 360,
       };
-      return [newPosition, ...prevTrail.slice(0, 19)]; // Keep last 20 positions
+      return [newPosition, ...prevTrail.slice(0, 19)];
     });
   };
 
@@ -328,7 +308,7 @@ const SwirlCursor = () => {
   }, []);
 
   if (!isClient) {
-    return null; // Return null on server-side
+    return null;
   }
 
   return (
@@ -359,8 +339,8 @@ const SwirlCursor = () => {
               strokeLinecap="round"
               strokeLinejoin="round"
               style={{
-                opacity: 1 - index * 0.05, // Fade out based on position in the trail
-                color: `hsl(${index * 20}, 100%, 50%)`, // Change color based on position
+                opacity: 1 - index * 0.05,
+                color: `hsl(${index * 20}, 100%, 50%)`,
               }}
             >
               <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
@@ -373,7 +353,6 @@ const SwirlCursor = () => {
   );
 };
 
-// Skill bar component
 const SkillBar = ({
   skill,
   index,
@@ -395,8 +374,8 @@ const SkillBar = ({
       className="mb-4"
     >
       <div className="flex justify-between mb-1">
-        <span className="text-lg font-semibold">{skill.name}</span>
-        <span className="text-lg font-bold">{skill.level}%</span>
+        <span className="text-base sm:text-lg font-semibold">{skill.name}</span>
+        <span className="text-base sm:text-lg font-bold">{skill.level}%</span>
       </div>
       <div
         className={cn(
@@ -415,7 +394,6 @@ const SkillBar = ({
   );
 };
 
-// Marquee component
 const Marquee = ({
   items,
   theme,
@@ -434,7 +412,7 @@ const Marquee = ({
           <span
             key={index}
             className={cn(
-              "text-xl font-semibold mx-8",
+              "text-base sm:text-xl font-semibold mx-4 sm:mx-8",
               theme === "dark" ? "text-white" : "text-black"
             )}
           >
@@ -446,7 +424,6 @@ const Marquee = ({
   );
 };
 
-// 3D Text component
 const AnimatedText3D = ({ text }: { text: string }) => {
   const textRef = useRef<any>();
   useFrame(({ clock }) => {
@@ -473,7 +450,6 @@ const AnimatedText3D = ({ text }: { text: string }) => {
   );
 };
 
-// Main portfolio component
 const EnhancedAnimatedPortfolio = () => {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const { scrollYProgress } = useScroll();
@@ -504,8 +480,8 @@ const EnhancedAnimatedPortfolio = () => {
       />
       <Navbar theme={theme} toggleTheme={toggleTheme} />
 
-      <main className="font-geist pt-16 sm:pt-20">
-        <section className="h-screen flex flex-col items-center justify-center relative overflow-hidden">
+      <main className="pt-16 sm:pt-20">
+        <section className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -513,28 +489,30 @@ const EnhancedAnimatedPortfolio = () => {
             className="absolute inset-0 z-0"
           >
             <img
-              src="panter psg2.png"
+              src="psg products.jpeg"
               alt="SaiGanesh Ponnaganti"
-              className="w-full h-full object-cover opacity-90"
+              className="w-full h-full object-cover opacity-50"
             />
           </motion.div>
 
-          <SparklesText text="SaiGanesh Ponnaganti" />
-          <SparklesText text="Full-Stack Web Developer" />
+          <SparklesText 
+            text="Ponnaganti SaiGanesh" 
+             
+          />
+          <SparklesText 
+            text="Full-Stack Web Developer & UI/UX Designer" 
+           
+          />
 
           <motion.a
             href="#projects"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className={cn(
-              "mt-10 px-8 py-3 rounded-full text-xl font-semibold transition-colors relative z-10",
-              theme === "dark"
-                ? "bg-white text-black hover:bg-gray-200"
-                : "bg-black text-white hover:bg-gray-800"
-            )}
+            className="mt-10"
           >
-            Explore My Work
+            <RainbowButton>Explore My Work</RainbowButton>
           </motion.a>
+
           <motion.div
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -546,7 +524,7 @@ const EnhancedAnimatedPortfolio = () => {
             }}
             className="absolute bottom-8 z-10"
           >
-            <ChevronDown className="w-10 h-10" />
+            <ChevronDown className="w-8 h-8 sm:w-10 sm:h-10" />
           </motion.div>
           <div className="absolute inset-0 -z-10">
             <Canvas>
@@ -569,208 +547,201 @@ const EnhancedAnimatedPortfolio = () => {
           className="font-display text-center text-4xl font-bold tracking-[-0.02em] bg-gradient-to-r from-purple-400 to-yellow-400"
         />
 
-<motion.section
-  id="about"
-  initial={{ opacity: 0, y: 50 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8 }}
-  className="min-h-screen flex items-center justify-center p-8 relative"
->
-  <div className="max-w-4xl text-center relative">
-   
-    <img
-      src="Robot3DAnimatedIcon.gif"
-      alt="3D Robot Icon"
-      width={150}
-      className="absolute top-0 left-1/3 transform -translate-x-1/2 -translate-y-1/2"
-    />
-    <h2 className="text-4xl font-bold mb-8 relative">About Me</h2>
-    <p className="text-xl leading-relaxed mb-6">
-      I'm a passionate Full-Stack Web Developer with a keen interest in creating innovative solutions. 
-      Currently pursuing my B.Tech in Computer Science and Engineering at Narasaraopet Engineering College, 
-      I bring a blend of theoretical knowledge and practical skills to every project.
-    </p>
-    <p className="text-xl leading-relaxed">
-      My expertise spans across various technologies, and I'm always eager to learn and adapt to new challenges. 
-      With a strong foundation in both front-end and back-end development, I strive to create seamless, 
-      user-friendly applications that solve real-world problems.
-    </p>
-  </div>
-</motion.section>
-
-<motion.section
-  id="skills"
-  initial={{ opacity: 0, y: 50 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8 }}
-  className="min-h-screen flex items-center justify-center p-8 relative "
->
-  <div className="max-w-4xl w-full relative">
-    <img
-      src="Jumping3DIcon.gif"
-      alt="Jumping Icon"
-      width={100}
-      className="absolute top-0 left-1 transform -translate-x-1/2 -translate-y-1/2"
-    />
-    <h2 className="text-4xl font-bold mb-12 text-center relative">
-      Skills & Expertise
-    </h2>
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {skills.map((skill, index) => (
-        <SkillBar
-          key={skill.name}
-          skill={skill}
-          index={index}
-          theme={theme}
-        />
-      ))}
-    </div>
-  </div>
-</motion.section>
-
-
-<motion.section 
-  id="projects"
-  initial={{ opacity: 0, y: 50 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8 }}
-  className="min-h-screen p-8 relative"
->
-  <img 
-    src="RotatingLoading3DIcon.gif" 
-    alt="Rotating Icon"
-    width={100} 
-    className="absolute left-1/3 z-0 top-0" 
-  />
-  
-  <h2 className="text-4xl font-bold mb-16 text-center z-10 relative">
-    Featured Projects
-  </h2>
-
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto z-10 relative">
-    {projects.map((project, index) => (
-      <motion.div
-        key={project.id}
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: index * 0.2 }}
-        className="relative overflow-hidden rounded-lg shadow-lg project-image"
-        whileHover={{ scale: 1.05 }}
-      >
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-64 object-cover"
-        />
-        <motion.div
-          className={cn(
-            "absolute inset-0 flex flex-col justify-center items-center p-6 text-white",
-            theme === "dark"
-              ? "bg-black bg-opacity-70"
-              : "bg-white bg-opacity-70"
-          )}
-          initial={{ opacity: 0 }}
-          whileHover={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
+        <motion.section
+          id="about"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="min-h-screen flex items-center justify-center p-4 sm:p-8 relative"
         >
-          <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
-          <p className="text-center mb-4">{project.description}</p>
-          <p className="text-sm mb-4">{project.tech}</p>
-          <span
-            className={cn(
-              "px-4 py-2 rounded-full text-sm font-semibold",
-              theme === "dark"
-                ? "bg-white text-black"
-                : "bg-black text-white"
-            )}
-          >
-            {project.category}
-          </span>
-        </motion.div>
-      </motion.div>
-    ))}
-  </div>
-</motion.section>
+          <div className="max-w-4xl text-center relative">
+            <img
+              src="Robot3DAnimatedIcon.gif"
+              alt="3D Robot Icon"
+              width={150}
+              className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 sm:w-32 md:w-40 lg:w-48"
+            />
+            <h2 className="text-3xl sm:text-4xl font-bold mb-8 relative">About Me</h2>
+            <p className="text-base sm:text-lg md:text-xl leading-relaxed mb-6">
+              I'm a passionate Full-Stack Web Developer with a keen interest in creating innovative solutions. 
+              Currently pursuing my B.Tech in Computer Science and Engineering at Narasaraopet Engineering College, 
+              I bring a blend of theoretical knowledge and practical skills to every project.
+            </p>
+            <p className="text-base sm:text-lg md:text-xl leading-relaxed">
+              My expertise spans across various technologies, and I'm always eager to learn and adapt to new challenges. 
+              With a strong foundation in both front-end and back-end development, I strive to create seamless, 
+              user-friendly applications that solve real-world problems.
+            </p>
+          </div>
+        </motion.section>
 
-<motion.section
-  id="experience"
-  initial={{ opacity: 0, y: 50 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8 }}
-  className="min-h-screen flex items-center justify-center p-8 relative"
->
-  {/* Background Image */}
-  <img 
-    src="Abstract3DIcon.gif" 
-    alt="3D Abstract Icon" 
-    width={450} 
-    className="z-0 absolute top-50 left-2/3 transform -translate-x-1/2"
-  />
-  
-  {/* Content Section */}
-  <div className="max-w-4xl w-full relative z-10">
-    <h2 className="text-4xl font-bold mb-12 text-center">Experience</h2>
-    
-    {experiences.map((exp, index) => (
-      <motion.div
-        key={exp.company}
-        initial={{ opacity: 0, x: -50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5, delay: index * 0.1 }}
-        className="mb-8"
-      >
-        <h3 className="text-2xl font-bold">{exp.role}</h3>
-        <p className="text-xl">{exp.company}</p>
-        <p className="text-lg text-gray-400">{exp.period}</p>
-      </motion.div>
-    ))}
-  </div>
-</motion.section>
+        <motion.section
+          id="skills"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="min-h-screen flex items-center justify-center p-4 sm:p-8 relative"
+        >
+          <div className="max-w-4xl w-full relative">
+            <img
+              src="Jumping3DIcon.gif"
+              alt="Jumping Icon"
+              width={100}
+              className="absolute top-0 left-1 transform -translate-x-1/2 -translate-y-1/2 w-16 sm:w-20 md:w-24 lg:w-28"
+            />
+            <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center relative">
+              Skills & Expertise
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+              {skills.map((skill, index) => (
+                <SkillBar
+                  key={skill.name}
+                  skill={skill}
+                  index={index}
+                  theme={theme}
+                />
+              ))}
+            </div>
+          </div>
+        </motion.section>
 
-<motion.section
-  id="education"
-  initial={{ opacity: 0, y: 50 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8 }}
-  className="min-h-screen flex items-center justify-center p-8 relative"
->
-  {/* Background Image */}
-  <img 
-    src="3dman.png" 
-    alt="3D Man" 
-    width={500} 
-    className="absolute right-40 z-0 top-1/2 transform -translate-y-1/2" 
-  />
-  
-  {/* Content */}
-  <div className="max-w-4xl w-full relative z-10">
-    <h2 className="text-4xl font-bold mb-12 text-center">Education</h2>
-    {education.map((edu, index) => (
-      <motion.div
-        key={edu.institution}
-        initial={{ opacity: 0, x: -50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5, delay: index * 0.1 }}
-        className="mb-8"
-      >
-        <h3 className="text-2xl font-bold">{edu.degree}</h3>
-        <p className="text-xl">{edu.institution}</p>
-        <p className="text-lg text-gray-400">{edu.period}</p>
-      </motion.div>
-    ))}
-  </div>
-</motion.section>
+        <motion.section 
+          id="projects"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="min-h-screen p-4 sm:p-8 relative"
+        >
+          <img 
+            src="RotatingLoading3DIcon.gif" 
+            alt="Rotating Icon"
+            width={100} 
+            className="absolute left-1/3 z-0 top-0 w-16 sm:w-20 md:w-24 lg:w-28" 
+          />
+          
+          <h2 className="text-3xl sm:text-4xl font-bold mb-12 sm:mb-16 text-center z-10 relative">
+            Featured Projects
+          </h2>
 
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 max-w-6xl mx-auto z-10 relative">
+            {projects.map((project, index) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.2 }}
+                className="relative overflow-hidden rounded-lg shadow-lg project-image"
+                whileHover={{ scale: 1.05 }}
+              >
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-48 sm:h-64 object-cover"
+                />
+                <motion.div
+                  className={cn(
+                    "absolute inset-0 flex flex-col justify-center items-center p-4 sm:p-6 text-white",
+                    theme === "dark"
+                      ? "bg-black bg-opacity-70"
+                      : "bg-white bg-opacity-70"
+                  )}
+                  initial={{ opacity: 0 }}
+                  whileHover={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <h3 className="text-xl sm:text-2xl font-bold mb-2">{project.title}</h3>
+                  <p className="text-center mb-4 text-sm sm:text-base">{project.description}</p>
+                  <p className="text-xs sm:text-sm mb-4">{project.tech}</p>
+                  <span
+                    className={cn(
+                      "px-3 py-1 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold",
+                      theme === "dark"
+                        ? "bg-white text-black"
+                        : "bg-black text-white"
+                    )}
+                  >
+                    {project.category}
+                  </span>
+                </motion.div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+
+        <motion.section
+          id="experience"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="min-h-screen flex items-center justify-center p-4 sm:p-8 relative"
+        >
+          <img 
+            src="Abstract3DIcon.gif" 
+            alt="3D Abstract Icon" 
+            width={450} 
+            className="z-0 absolute top-50 left-2/3 transform -translate-x-1/2 w-64 sm:w-96 md:w-112 lg:w-128"
+          />
+          
+          <div className="max-w-4xl w-full relative z-10">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center">Experience</h2>
+            
+            {experiences.map((exp, index) => (
+              <motion.div
+                key={exp.company}
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="mb-8"
+              >
+                <h3 className="text-xl sm:text-2xl font-bold">{exp.role}</h3>
+                <p className="text-lg sm:text-xl">{exp.company}</p>
+                <p className="text-base sm:text-lg text-gray-400">{exp.period}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
+
+        <motion.section
+          id="education"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="min-h-screen flex items-center justify-center p-4 sm:p-8 relative"
+        >
+          <img 
+            src="3dman.png" 
+            alt="3D Man" 
+            width={500} 
+            className="absolute right-0 sm:right-40 z-0 top-1/2 transform -translate-y-1/2 w-64 sm:w-96 md:w-112 lg:w-128" 
+          />
+          
+          <div className="max-w-4xl w-full relative z-10">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center">Education</h2>
+            {education.map((edu, index) => (
+              <motion.div
+                key={edu.institution}
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="mb-8"
+              >
+                <h3 className="text-xl sm:text-2xl font-bold">{edu.degree}</h3>
+                <p className="text-lg sm:text-xl">{edu.institution}</p>
+                <p className="text-base sm:text-lg text-gray-400">{edu.period}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
 
         <motion.section
           id="certifications"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="min-h-screen flex items-center justify-center p-8"
+          className="min-h-screen flex items-center justify-center p-4 sm:p-8"
         >
           <div className="max-w-4xl w-full">
-            <h2 className="text-4xl font-bold mb-12 text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center">
               Certifications & Awards
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -783,6 +754,7 @@ const EnhancedAnimatedPortfolio = () => {
                       initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.5, delay: index * 0.1 }}
+                      className="text-base sm:text-lg"
                     >
                       {cert}
                     </motion.li>
@@ -798,6 +770,7 @@ const EnhancedAnimatedPortfolio = () => {
                       initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.5, delay: index * 0.1 }}
+                      className="text-base sm:text-lg"
                     >
                       {award}
                     </motion.li>
@@ -813,15 +786,15 @@ const EnhancedAnimatedPortfolio = () => {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="min-h-screen flex items-center justify-center p-8"
+          className="min-h-screen flex items-center justify-center p-4 sm:p-8"
         >
           <div className="max-w-3xl w-full">
-            <h2 className="text-4xl font-bold mb-8 text-center font-geist">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-8 text-center font-geist">
               Contact Me
             </h2>
             <form className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-xl mb-2">
+                <label htmlFor="name" className="block text-lg sm:text-xl mb-2">
                   Name
                 </label>
                 <input
@@ -837,7 +810,7 @@ const EnhancedAnimatedPortfolio = () => {
                 />
               </div>
               <div>
-                <label htmlFor="email" className="block text-xl mb-2">
+                <label htmlFor="email" className="block text-lg sm:text-xl mb-2">
                   Email
                 </label>
                 <input
@@ -853,7 +826,7 @@ const EnhancedAnimatedPortfolio = () => {
                 />
               </div>
               <div>
-                <label htmlFor="message" className="block text-xl mb-2">
+                <label htmlFor="message" className="block text-lg sm:text-xl mb-2">
                   Message
                 </label>
                 <textarea
@@ -873,7 +846,7 @@ const EnhancedAnimatedPortfolio = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className={cn(
-                  "w-full p-4 text-xl font-bold rounded-lg transition-colors",
+                  "w-full p-4 text-lg sm:text-xl font-bold rounded-lg transition-colors",
                   theme === "dark"
                     ? "bg-white text-black hover:bg-gray-200"
                     : "bg-black text-white hover:bg-gray-800"
@@ -886,18 +859,12 @@ const EnhancedAnimatedPortfolio = () => {
         </motion.section>
       </main>
 
-      <footer className="py-8 text-center font-geist">
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+      <footer className="py-8 text-center font-geist px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-center items-center">
           <iframe
             style={{ borderRadius: "12px" }}
             src="https://open.spotify.com/embed/playlist/6oXhJUD61j90ef9KFaFhQD?utm_source=generator&theme=0"
-            width="50%"
+            width="100%"
             height="250"
             frameBorder="0"
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
@@ -905,33 +872,34 @@ const EnhancedAnimatedPortfolio = () => {
           ></iframe>
         </div>
 
-        <p>
+        <p className="mt-4 text-sm sm:text-base">
           &copy; 2023 SaiGanesh Ponnaganti. Crafting innovative web solutions.
         </p>
 
-        <div className="flex justify-center space-x-6 mt-4">
+        <div className="flex justify-center space-x-4 sm:space-x-6 mt-4">
           <motion.a
             href="https://www.instagram.com/saiganesh_957/"
             whileHover={{ scale: 1.1 }}
           >
-            <Instagram className="w-6 h-6" />
+            <Instagram className="w-5 h-5 sm:w-6 sm:h-6" />
           </motion.a>
           <motion.a
             href="www.linkedin.com/in/saiganesh-ponnaganti-108b36283"
             whileHover={{ scale: 1.1 }}
           >
-            <Linkedin className="w-6 h-6" />
+            <Linkedin className="w-5 h-5 sm:w-6 sm:h-6" />
           </motion.a>
-
           <motion.a href="https://github.com/" whileHover={{ scale: 1.1 }}>
-            <Github className="w-6 h-6" />
+            <Github className="w-5 h-5 sm:w-6 sm:h-6" />
           </motion.a>
-          <motion.a href="psg779955@gmail.com" whileHover={{ scale: 1.1 }}>
-            <Mail className="w-6 h-6" />
+          <motion.a href="mailto:psg779955@gmail.com" whileHover={{ scale: 1.1 }}>
+            <Mail className="w-5 h-5 sm:w-6 sm:h-6" />
           </motion.a>
         </div>
       </footer>
     </div>
   );
 };
+
 export default EnhancedAnimatedPortfolio;
+
