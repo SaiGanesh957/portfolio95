@@ -204,23 +204,25 @@ const Navbar = ({
             </div>
           </div>
           <div className="flex items-center">
-            <motion.button
-              onClick={toggleTheme}
-              className={cn(
-                "p-2 rounded-full transition-colors duration-300 mr-2",
-                theme === "dark"
-                  ? "bg-gray-800 text-white-400"
-                  : "bg-gray-200 text-gray-800"
-              )}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              {theme === "dark" ? (
-                <Sun className="w-5 h-5" />
-              ) : (
-                <Moon className="w-5 h-5" />
-              )}
-            </motion.button>
+          <motion.button
+  onClick={toggleTheme}
+  className={cn(
+    "p-2 rounded-full transition-colors duration-300 mr-2",
+    theme === "dark"
+      ? "bg-gray-800 text-white-400"
+      : "bg-gray-200 text-gray-800"
+  )}
+  whileHover={{ scale: 1.1 }}
+  whileTap={{ scale: 0.9 }}
+  aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+>
+  {theme === "dark" ? (
+    <Sun className="w-5 h-5" />
+  ) : (
+    <Moon className="w-5 h-5" />
+  )}
+</motion.button>
+
             <motion.button
               onClick={toggleMenu}
               className="md:hidden p-2 rounded-full transition-colors duration-300"
