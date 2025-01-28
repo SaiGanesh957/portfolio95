@@ -868,7 +868,7 @@ const EnhancedAnimatedPortfolio = () => {
 
       <footer className="py-8 text-center font-geist px-4 sm:px-6 lg:px-8">
         <div className="flex justify-center items-center">
-          <iframe
+          <iframe title="my Spotify Frame"
             style={{ borderRadius: "12px" }}
             src="https://open.spotify.com/embed/playlist/6oXhJUD61j90ef9KFaFhQD?utm_source=generator&theme=0"
             width="100%"
@@ -910,3 +910,6 @@ const EnhancedAnimatedPortfolio = () => {
 
 export default EnhancedAnimatedPortfolio;
 
+// git add .
+// git commit -m "65%"
+//git push https://github.com/SaiGanesh957/portfolio95.git
