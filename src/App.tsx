@@ -557,8 +557,8 @@ const EnhancedAnimatedPortfolio = () => {
         >
           <div className="max-w-4xl text-center relative">
             <img
-              src="Robot3DAnimatedIcon.gif"
-              alt="3D Robot Icon"
+              src="Aboutmeimg.png"
+              alt="Aboutmeimg.png"
               width={150}
               className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 sm:w-32 md:w-40 lg:w-48"
             />
@@ -585,10 +585,10 @@ const EnhancedAnimatedPortfolio = () => {
         >
           <div className="max-w-4xl w-full relative">
             <img
-              src="Jumping3DIcon.gif"
-              alt="Jumping Icon"
+              src="skillsimg.jpg"
+              alt="skillsimg"
               width={100}
-              className="absolute top-0 left-1 transform -translate-x-1/2 -translate-y-1/2 w-16 sm:w-20 md:w-24 lg:w-28"
+              className="absolute top-0 left-40 transform -translate-x-1/2 -translate-y-1/2 w-16 sm:w-20 md:w-24 lg:w-28"
             />
             <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center relative">
               Skills & Expertise
@@ -618,8 +618,8 @@ const EnhancedAnimatedPortfolio = () => {
             className="min-h-screen p-8 relative"
             >
       <img 
-        src="RotatingLoading3DIcon.gif" 
-        alt="Rotating Icon"
+        src="projectsimg.png" 
+        alt="projects img"
         width={100} 
         className="absolute left-1/3 z-0 top-0" 
       />
@@ -683,8 +683,8 @@ const EnhancedAnimatedPortfolio = () => {
           className="min-h-screen flex items-center justify-center p-4 sm:p-8 relative"
         >
           <img 
-            src="Abstract3DIcon.gif" 
-            alt="3D Abstract Icon" 
+            src="experinceimg.png" 
+            alt="Experince img" 
             width={450} 
             className="z-0 absolute top-50 left-2/3 transform -translate-x-1/2 w-64 sm:w-96 md:w-112 lg:w-128"
           />
@@ -716,8 +716,8 @@ const EnhancedAnimatedPortfolio = () => {
           className="min-h-screen flex items-center justify-center p-4 sm:p-8 relative"
         >
           <img 
-            src="3dman.png" 
-            alt="3D Man" 
+            src="Educationimg.png" 
+            alt="Education img" 
             width={500} 
             className="absolute right-0 sm:right-40 z-0 top-1/2 transform -translate-y-1/2 w-64 sm:w-96 md:w-112 lg:w-128" 
           />
