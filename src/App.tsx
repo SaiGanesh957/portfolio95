@@ -489,7 +489,7 @@ const EnhancedAnimatedPortfolio = () => {
             className="absolute inset-0 z-0"
           >
             <img
-              src="Designer7.webp"
+              src="Designer33.png"
               alt="SaiGanesh Ponnaganti"
               className="w-full h-full object-cover opacity-90"
             />
