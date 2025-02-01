@@ -880,7 +880,7 @@ const EnhancedAnimatedPortfolio = () => {
         </div>
 
         <p className="mt-4 text-sm sm:text-base">
-          &copy; 2023 SaiGanesh Ponnaganti. Crafting innovative web solutions.
+          &copy; 2023 Ponnaganti SaiGanesh. Crafting innovative web solutions.
         </p>
 
         <div className="flex justify-center space-x-4 sm:space-x-6 mt-4">
